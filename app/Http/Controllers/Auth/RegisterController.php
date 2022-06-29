@@ -13,6 +13,7 @@ use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -103,7 +104,9 @@ class RegisterController extends Controller
         $userInfo['password'] = bcrypt($request->get('password'));
         $userInfo['b_day'] = $birthday;
 
-        User::insert($userInfo);
+        $user = User::create($userInfo);
+        Auth::loginUsingId($user->id);
+        return redirect()->route('dashboard');
     }
 
 }

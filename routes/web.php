@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
@@ -17,18 +18,18 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('welcome');
-})->name('welcome');
+})->name('my_home');
 
-Route::post('/login', function () {
+Route::post('/login_1', function () {
     return view('login');
-})->name('login.view');
+})->name('login_1.view');
 
 // Auth::routes();
 
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('login', 'Auth\LoginController@login');
-Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+Route::post('login', 'Auth\LoginController@login')->name('saveLogin');
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
 // Registration Routes...
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
@@ -51,3 +52,4 @@ Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->na
 Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

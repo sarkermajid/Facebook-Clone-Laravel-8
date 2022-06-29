@@ -35,8 +35,8 @@
                         <div class="inline-form pull-right">
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
-                                <input type="text" name="user_email" placeholder="Email Address"/>
-                                <input type="password" name="user_email" placeholder="Password"/>
+                                <input type="text" name="email" placeholder="Email Address"/>
+                                <input type="password" name="password" placeholder="Password"/>
                                 <input type="submit" value="Login" class="btn btn-success"/>
                             </form>
                         </div>
