@@ -181,3 +181,15 @@ input:focus,select:focus,textarea:focus,button:focus{
     .header{position:relative;}
     .header .logo{text-align:center}
 }
+.navbar-design{
+    background-color: #2d9a40;
+    font-size: 18px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.navbar-design-name{
+    color: white;
+}
+.navbar-design-name:hover{
+    color: black;
+}
