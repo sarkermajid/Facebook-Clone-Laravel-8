@@ -3,14 +3,14 @@
 @section('center')
     <div class="col-sm-6">
         <div class="text-center">
-            <img class="img-circle" src="images/user_8/image_1619243210.jpeg" height="200" width="300">
+            <img class="img-circle" src="{{asset(auth()->user()->image?? '/images/no_user.jpg')}}" height="200" width="300">
             <br><br>
         </div>
 
         <table style="width:100%" class="table table-striped">
             <tr>
                 <td><strong>First Name</strong></td>
-                <td id="f_name">Test Name</td>
+                <td id="f_name">{{auth()->user()->fname}}</td>
                 <td>
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" onclick="setField('f_name');">
                         Edit
@@ -19,7 +19,7 @@
             </tr>
             <tr>
                 <td><strong>Last Name</strong></td>
-                <td id="l_name">Test Name</td>
+                <td id="l_name">{{auth()->user()->lname}}</td>
                 <td>
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" onclick="setField('l_name');">
                         Edit
@@ -27,28 +27,19 @@
                 </td>
             </tr>
             <tr>
-                <td><strong>Username</strong></td>
-                <td id="username">test_username</td>
+                <td><strong>Birthday</strong></td>
+                <td id="birthday">{{date('F j, Y', strtotime(auth()->user()->b_day))}}</td>
                 <td>
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" onclick="setField('username');">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" onclick="setField('birthday');">
                         Edit
                     </button>
                 </td>
             </tr>
             <tr>
                 <td><strong>Email</strong></td>
-                <td id="email">raju@raju.com</td>
+                <td id="email">{{auth()->user()->email}}</td>
                 <td>
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" onclick="setField('email');">
-                        Edit
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td><strong>Phone</strong></td>
-                <td id="phone">0123456789</td>
-                <td>
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" onclick="setField('phone');">
                         Edit
                     </button>
                 </td>
@@ -56,8 +47,8 @@
         </table>
     </div>
 
-    <div class="modal fade bd-example-modal-sm" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
+    <div class="modal fade bd-example-modal-md" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
             <div class="modal-content">
                 <div class="modal-header text-center">
                     <h5 class="modal-title" id="exampleModalLongTitle"><b>Edit</b></h5>
@@ -70,11 +61,11 @@
                         @csrf
                         <div class="row">
                             <div class="col-sm-4">
-                                <h4><label id="field_name" class="pull-right"></label></h4>
-                                <input type="hidden" value="" name="field_name">
+                                <h4><label id="fld_name" class="pull-right"></label></h4>
+                                <input type="hidden" value="" name="fld_name">
                             </div>
                             <div class="col-sm-8">
-                                <input type="text" value="" id="field_value">
+                                <input class="form-group" type="text" value="" id="fld_value">
                             </div>
                         </div>
                     </form>
@@ -88,3 +79,14 @@
     </div>
 
 @endsection
+
+@push('scripts')
+    <script type="text/javascript">
+        function setField(field_name){
+            $('#fld_name').html(field_name.charAt(0).toUpperCase()+field_name.substr(1).toLowerCase());
+            var field_value= $('#'+field_name).html();
+
+            $('#fld_value').val(field_value);
+        }
+    </script>
+@endpush

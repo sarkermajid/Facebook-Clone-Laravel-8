@@ -62,8 +62,8 @@
             <div class="row post-action">
                 <ul class="post-action-menu">
                     <li><a href="javascript:void(0);" class="text-mute" onclick="like(1);">Like</a></li>
-                    <li><a href="javascript:void(0);" class="text-mute" onclick="share(1);">Share</a></li>
                     <li><a href="javascript:void(0);" class="text-mute" onclick="comment(1);">Comment</a></li>
+                    <li><a href="javascript:void(0);" class="text-mute" onclick="share(1);">Share</a></li>
                     <li class="pull-right"><a href="#" class="text-mute"><span id="post_like_count_1">{{ $post['likes'] }}</span> Likes</a></li>
                     <li class="pull-right"><a href="#" class="text-mute"><span id="post_comment_count_1">{{ $post['comments'] }}</span> Comments</a></li>
                     <li class="pull-right"><a href="#" class="text-mute"><span id="post_share_count_1">{{ $post['shares'] }}</span> Shares</a></li>
@@ -73,3 +73,36 @@
         @endforeach
     </div>
 @endsection
+
+@push('scripts')
+
+<script type="text/javascript">
+    function like(id){
+        var elem = document.getElementById("post_like_count_"+id);
+        var count = parseInt(elem.innerHTML);
+        elem.innerHTML = count+1;
+        highlight(elem);
+    }
+    function share(id){
+        var elem = document.getElementById("post_share_count_"+id);
+        var count = parseInt(elem.innerHTML);
+        elem.innerHTML = count+1;
+        highlight(elem);
+    }
+    function comment(id){
+        var elem = document.getElementById("post_comment_count_"+id);
+        var count = parseInt(elem.innerHTML);
+        elem.innerHTML = count+1;
+        highlight(elem);
+    }
+    function highlight(elem){
+        elem.style.color = "red";
+        elem.parentElement.parentElement.style.transform="scale(1.5)";
+        setTimeout(function(){
+            elem.style.color="";
+            elem.parentElement.parentElement.style.transform="scale(1)";
+        },300);
+    }
+</script>
+
+@endpush
